@@ -5,3 +5,8 @@
 - node js
 - express js
 - nodemon
+## Instructions
+- Create folder server
+   1. npm init --yes
+   2. npm i express pg cors
+   3. npm install nodemon (this is the monitor for see change in the code)
