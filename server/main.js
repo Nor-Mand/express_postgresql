@@ -11,12 +11,23 @@ app.use(cors());
 app.use(express.json());
 
 
-// FETCH DATA
-app.use("/testing", async (req,res) => {
+// FETCH  ALL DATA
+app.get("/testing", async (req,res) => {
     try {
-        const getAll = await pool.query('SELECT * FROM res_partner LIMIT 10')
-        res.json(getAll.rows);
+        const allData = await pool.query('SELECT * FROM res_partner')
+        res.json(allData.rows);
     } catch (err) {
+        console.log(err.message)
+    }
+})
+
+// FETCH DATA BY ID
+app.get("/testing/:id", async (req,res) => {
+    try {
+        const { id } = req.params;
+        const idData = await pool.query('SELECT * FROM res_partner WHERE id = $1', [id])
+        res.json(idData.rows[0]);
+    } catch (err){
         console.log(err.message)
     }
 })

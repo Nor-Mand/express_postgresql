@@ -11,4 +11,4 @@
    2. npm i express pg cors
    3. npm install nodemon (this is the monitor for see change in the code)
    4. configuration the file of database --> see db_connection.js
-   5. 
+   5. use async and await to fech data --> see section FETCH DATA code
