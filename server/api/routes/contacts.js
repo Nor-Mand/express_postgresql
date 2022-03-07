@@ -1,18 +1,12 @@
-const express = require('express');
-const app = express();
-const port = 5000;
-const cors = require('cors');
-const pool = require('./db/db');
-const {json} = require("express");
+const express = require('express')
+const router = express.Router();
 
-// MIDDLEWARE
-app.use(cors());
+const pool = require("../../db/db");
 
-app.use(express.json());
 
 
 // FETCH  ALL DATA
-app.get("/testing", async (req,res) => {
+router.get("/", async (req,res) => {
     try {
         const allData = await pool.query('SELECT id, name FROM res_partner LIMIT 10')
         res.json(allData.rows);
@@ -22,7 +16,7 @@ app.get("/testing", async (req,res) => {
 })
 
 // FETCH DATA BY ID
-app.get("/testing/:id", async (req,res) => {
+router.get("/:id", async (req,res) => {
     try {
         const { id } = req.params;
         const idData = await pool.query('SELECT id, name FROM res_partner WHERE id = $1', [id])
@@ -32,5 +26,4 @@ app.get("/testing/:id", async (req,res) => {
     }
 })
 
-// PORT
-app.listen(port,() => { console.log(`Listening on port: ${port}`)});
+module.exports = router;
